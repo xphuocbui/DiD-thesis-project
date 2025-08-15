@@ -1,0 +1,54 @@
+{
+  "model_1": {
+    "did_estimate": 0.01062455083263136,
+    "standard_error": 0.004800319131522213,
+    "p_value": 0.026886281453834204,
+    "significant": true,
+    "confidence_interval_95": [
+      0.0012159253348478227,
+      0.020033176330414897
+    ],
+    "n_observations": 23986,
+    "r_squared": 0.0,
+    "model_summary": "<pyfixest.estimation.feols_.Feols object at 0x00000223B41C5010>"
+  },
+  "model_2": {
+    "did_estimate": -0.030862683833269178,
+    "standard_error": 0.0054026800361428005,
+    "p_value": 1.1266115595987003e-08,
+    "significant": true,
+    "confidence_interval_95": [
+      -0.041451936704109064,
+      -0.02027343096242929
+    ],
+    "n_observations": 23986,
+    "r_squared": 0.0,
+    "model_summary": "<pyfixest.estimation.feols_.Feols object at 0x00000223B657E990>"
+  },
+  "model_3": {
+    "did_estimate": 0.006853217047042911,
+    "standard_error": 0.004722957043019496,
+    "p_value": 0.14678080542897853,
+    "significant": false,
+    "confidence_interval_95": [
+      -0.0024037787572753003,
+      0.016110212851361123
+    ],
+    "n_observations": 23986,
+    "r_squared": 0.0,
+    "model_summary": "<pyfixest.estimation.feols_.Feols object at 0x00000223B75FF750>"
+  },
+  "model_4": {
+    "did_estimate": -0.03279708029421694,
+    "standard_error": 0.012901230107942202,
+    "p_value": 0.01352931770373278,
+    "significant": true,
+    "confidence_interval_95": [
+      -0.058083491305783656,
+      -0.007510669282650227
+    ],
+    "n_observations": 23986,
+    "r_squared": 0.0,
+    "model_summary": "<pyfixest.estimation.feols_.Feols object at 0x00000223B75FF610>"
+  }
+}
