@@ -1,0 +1,45 @@
+DiD COHORT FILTERING SUMMARY
+==================================================
+
+FILTERING PIPELINE RESULTS:
+------------------------------
+Original records: 622,575
+After birth cohort filter: 54,149
+After age constraints: 28,918
+Final records (complete outcomes): 23,986
+Overall retention rate: 3.85%
+
+COHORT COMPOSITION:
+--------------------
+Treated cohort (2007-2009): 9,231 observations
+Control cohort (1997-1999): 14,755 observations
+Total observations: 23,986
+
+DiD TREATMENT CELLS:
+--------------------
+Treated × Pre-reform: 0
+Treated × Post-reform: 9,231
+Control × Pre-reform: 387
+Control × Post-reform: 14,368
+
+DATA COVERAGE:
+---------------
+Survey years: 2012, 2014, 2016, 2018, 2020
+Birth years: 1997.0, 1998.0, 1999.0, 2007.0, 2008.0, 2009.0
+Treated age range: 11.0-13.0
+Control age range: 15.0-23.0
+
+OUTCOME VARIABLE DISTRIBUTIONS:
+-----------------------------------
+Treated cohort (Current edu. level):
+  Secondary school: 7,862
+  Primary school: 1,369
+
+Control cohort (education level):
+  High school: 7,244
+  Secondary school: 4,772
+  Primary school: 1,979
+  College: 376
+  No qualification: 363
+  University: 18
+  Other: 3

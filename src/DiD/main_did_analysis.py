@@ -95,17 +95,55 @@ class DiDAnalysisOrchestrator:
     def _run_data_preparation(self):
         """
         Step 1: Prepare data for DiD analysis.
-        This will call data preparation scripts.
+        This will call cohort filtering and data preparation scripts.
         """
-        logger.info("Step 1: Running data preparation")
+        logger.info("Step 1: Running data preparation - Cohort filtering")
         self.current_step = 1
         
-        # TODO: Import and call data preparation script
-        # from .data_preparation import prepare_did_data
-        # self.results['data_prep'] = prepare_did_data(self.config)
+        try:
+            # Import and run cohort filtering
+            import sys
+            from pathlib import Path
+            
+            # Add the regression run folder to path (handle spaces in folder name)
+            regression_run_path = Path(__file__).parent / "regression run"
+            sys.path.insert(0, str(regression_run_path))
+            
+            from cohort_filtering import CohortFilter
+            
+            # Set up paths
+            data_path = self.config.get("data_path", "data/all_years_merged_dataset_final_corrected.csv")
+            output_path = self.config.get("output_path", "results/")
+            
+            # Initialize and run cohort filtering
+            cohort_filter = CohortFilter(data_path, output_path)
+            filtered_data, summary_stats = cohort_filter.run_full_filtering()
+            
+            # Store results
+            self.results['data_prep'] = {
+                "status": "completed",
+                "message": "Cohort filtering completed successfully",
+                "filtered_observations": len(filtered_data),
+                "treated_cohort_size": summary_stats['treated_cohort']['total_obs'],
+                "control_cohort_size": summary_stats['control_cohort']['total_obs'],
+                "output_files": [
+                    "results/did_cohorts_filtered.csv",
+                    "results/cohort_filtering_summary.txt"
+                ]
+            }
+            
+            logger.info(f"Cohort filtering completed: {len(filtered_data):,} observations retained")
+            logger.info(f"Treated cohort: {summary_stats['treated_cohort']['total_obs']:,} observations")
+            logger.info(f"Control cohort: {summary_stats['control_cohort']['total_obs']:,} observations")
+            
+        except Exception as e:
+            logger.error(f"Error in data preparation step: {str(e)}")
+            self.results['data_prep'] = {
+                "status": "failed",
+                "message": f"Data preparation failed: {str(e)}"
+            }
+            raise
         
-        # Placeholder for now
-        self.results['data_prep'] = {"status": "pending", "message": "Data preparation script to be implemented"}
         logger.info("Data preparation step completed")
     
     def _run_parallel_trends_test(self):
@@ -219,9 +257,9 @@ def main():
     
     # Example configuration - modify as needed
     config = {
-        "data_path": "../../data/",
-        "output_path": "./results/",
-        "treatment_year": 2016,  # Adjust based on your treatment timing
+        "data_path": "data/all_years_merged_dataset_final_corrected.csv",
+        "output_path": "results/",
+        "treatment_year": 2013,  # Education Reform 29 passed in November 2013
         "control_variables": [],  # Add your control variables
         "cluster_variable": "tinh",  # Clustering variable
         "confidence_level": 0.95
